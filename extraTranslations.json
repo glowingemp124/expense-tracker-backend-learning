@@ -1,0 +1,7 @@
+{
+  "invalid_otp_1": "Invalid OTP or email",
+  "email_invalid": "Email is invalid",
+  "suggested_friends": "Suggested friends fetched successfully",
+  "auth_header_missing": "Authorization header missing",
+  "coming_soon": "Coming soon"
+}

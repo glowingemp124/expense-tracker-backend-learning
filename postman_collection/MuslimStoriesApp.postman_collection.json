@@ -1,0 +1,5716 @@
+{
+	"info": {
+		"_postman_id": "bcde912f-42ac-4d78-b93c-32fe7a2d796f",
+		"name": "MuslimStoriesApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3104553",
+		"_collection_link": "https://warped-escape-145657.postman.co/workspace/Muslim-Stories-App~7ec51912-9fd4-49e8-a2e7-e251ec5648f8/collection/3104553-bcde912f-42ac-4d78-b93c-32fe7a2d796f?action=share&source=collection_link&creator=3104553"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Set Variables on Environment and Collection\", function () {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    // Setting environment variables",
+									"    pm.environment.set(\"token\", jsonData.data.token);",
+									"    pm.environment.set(\"email\", jsonData.data.basicInfo.email);",
+									"    pm.environment.set(\"phoneNumber\", jsonData.data.basicInfo.phoneNumber);",
+									"",
+									"    // Setting collection variables",
+									"    pm.collectionVariables.set(\"token\", jsonData.data.token);",
+									"    pm.collectionVariables.set(\"email\", jsonData.data.basicInfo.email);",
+									"    pm.collectionVariables.set(\"phoneNumber\", jsonData.data.basicInfo.phoneNumber);",
+									"",
+									"    // Extracting password from request body",
+									"    let requestBody = JSON.parse(pm.request.body.raw);",
+									"    pm.environment.set(\"password\", requestBody.password);",
+									"    pm.collectionVariables.set(\"password\", requestBody.password);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"1234\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\",\n    \"userType\":\"guest\" //user/guest/admin\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/login",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"1234\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\",\n    \"userType\":\"guest\" //user/guest/admin\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/login",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "946"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3b2-ukHtLdWj24MlHtQRZ7+AcTshkcQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 07:04:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login success\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"685b9f73b30954db2fa6143c\",\n            \"profileIcon\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"name\": \"Georgiana49\",\n            \"email\": \"testuser9226@gmail.com\",\n            \"phoneNumber\": \"+923016000248\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"guest\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-06-25T07:04:19.889Z\",\n            \"updatedAt\": \"2025-06-25T07:04:19.889Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"413573\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 1,\n                \"otpRequestTimestamp\": \"2025-06-25T07:04:19.873Z\",\n                \"otpExpires\": \"2025-06-25T07:14:19.875Z\"\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T07:04:19.873Z\"\n            }\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODViOWY3M2IzMDk1NGRiMmZhNjE0M2MiLCJpYXQiOjE3NTA4MzUwNjl9.Y7OFKy8G8cRXMYAFlsY8C766ei0WibhqJrKXnhePG2o\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"",
+									"  var jsonData = pm.response.json();",
+									"    pm.test(\"Token\", function () {",
+									"      ",
+									"        pm.environment.set(\"email\", jsonData.data.basicInfo.email);",
+									"",
+									"        pm.environment.set(\"phoneNumber\", jsonData.data.basicInfo.phoneNumber);",
+									"",
+									"        pm.environment.set(\"emailOtp\", jsonData.data.otpInfo.emailOtp.otp);",
+									"",
+									"        pm.collectionVariables.set(\"email\", jsonData.data.basicInfo.email);",
+									"",
+									"        pm.collectionVariables.set(\"phoneNumber\", jsonData.data.basicInfo.phoneNumber);",
+									"",
+									"        pm.collectionVariables.set(\"emailOtp\", jsonData.data.otpInfo.emailOtp.otp);",
+									"",
+									"        let requestBody = JSON.parse(pm.request.body.raw);",
+									"        pm.environment.set(\"password\", requestBody.password);",
+									"        ",
+									"    });",
+									"});",
+									"// Parse the raw request body",
+									"let requestBody = pm.request.body.raw;",
+									"",
+									"try {",
+									"    let jsonData = JSON.parse(requestBody); // Parse the raw request body to JSON",
+									"    let email = jsonData.email; // Access the email field",
+									"",
+									"    // Now set the environment variable",
+									"    pm.environment.set(\"InvalidEmail\", email);",
+									"    console.log(\"Email extracted and set to environment variable:\", email);",
+									"} catch (e) {",
+									"    console.log(\"Error parsing request body:\", e);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Generate a random 7-digit number for the phone number",
+									"let randomPhoneNumber = Math.floor(1000000 + Math.random() * 9000000);",
+									"",
+									"// Choose a valid mobile network code in Pakistan",
+									"let validMobileNetworkCode = Math.floor(300 + Math.random() * 8); // Random number between 300 and 307 (valid codes)",
+									"",
+									"// Set the phone number with Pakistan country code",
+									"let internationalPhoneNumber = `+92${validMobileNetworkCode}${randomPhoneNumber}`;",
+									"",
+									"// Store the generated phone number in an environment variable",
+									"pm.environment.set(\"randomPhoneNumber\", internationalPhoneNumber);",
+									"",
+									"console.log(\"Generated Phone Number:\", internationalPhoneNumber);",
+									"",
+									"",
+									"// Generate a random number",
+									"let randomNumber = Math.floor(Math.random() * 10000); // Generates a number between 0 and 9999",
+									"",
+									"// Create a random email using the random number",
+									"let randomEmail = `testuser${randomNumber}@gmail.com`;",
+									"",
+									"// Store the generated email in an environment variable",
+									"pm.environment.set(\"randomEmail\", randomEmail);",
+									"",
+									"console.log(\"Generated Email:\", randomEmail);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"profileIcon\": \"noimage.png\",\n    \"name\": \"{{$randomUserName}}\",\n    \"email\": \"{{randomEmail}}\",\n    \"phoneNumber\": \"{{randomPhoneNumber}}\",\n    \"password\": \"123456\",\n    \"deviceType\": \"android\", //andoird/ios/web\n    \"userType\":\"guest\",\n    \"deviceId\": \"x123\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/register",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "### Register User\n\nThis endpoint is used to register a new user.\n\n#### Request Body\n\n- `profileIcon` (string): Unique identifier referencing a profile Bitmoji.\n    \n- `name` (string): The user's full name.\n    \n- `annonymousName` (string): A randomly generated username.\n    \n- `email` (string): The user's email address.\n    \n- `phoneNumber` (string): The user's phone number.\n    \n- `phoneNote` (string): Additional note about the phone number.\n    \n- `password` (string): The user's chosen password.\n    \n- `deviceType` (string): The type of device (android/ios).\n    \n- `deviceId` (string): The device ID from Firebase FCM.\n    \n- `timezone` (string): The user's timezone.\n    \n\n#### Response (JSON Schema)\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"message\": {\n            \"type\": \"string\"\n        },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"basicInfo\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"profileIcon\": {\n                            \"type\": \"string\"\n                        },\n                        \"name\": {\n                            \"type\": \"string\"\n                        },\n                        \"annonymousName\": {\n                            \"type\": \"string\"\n                        },\n                        \"email\": {\n                            \"type\": \"string\"\n                        },\n                        \"phoneNumber\": {\n                            \"type\": \"string\"\n                        },\n                        \"phoneNote\": {\n                            \"type\": \"string\"\n                        }\n                    }\n                },\n                \"accountState\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"userType\": {\n                            \"type\": \"string\"\n                        },\n                        \"status\": {\n                            \"type\": \"string\"\n                        },\n                        \"verificationStatus\": {\n                            \"type\": \"string\"\n                        }\n                    }\n                },\n                \"profileCompletionStatus\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"personalDetails\": {\n                            \"type\": \"boolean\"\n                        },\n                        \"pregnancyDetails\": {\n                            \"type\": \"boolean\"\n                        },\n                        \"lossDetails\": {\n                            \"type\": \"boolean\"\n                        },\n                        \"healingDetails\": {\n                            \"type\": \"boolean\"\n                        }\n                    }\n                },\n                \"metadata\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"_id\": {\n                            \"type\": \"string\"\n                        },\n                        \"timezone\": {\n                            \"type\": \"string\"\n                        },\n                        \"createdAt\": {\n                            \"type\": \"string\"\n                        },\n                        \"updatedAt\": {\n                            \"type\": \"string\"\n                        },\n                        \"__v\": {\n                            \"type\": \"integer\"\n                        }\n                    }\n                },\n                \"otpInfo\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"otp\": {\n                            \"type\": \"string\"\n                        },\n                        \"otpUsed\": {\n                            \"type\": \"boolean\"\n                        },\n                        \"otpExpires\": {\n                            \"type\": \"string\"\n                        }\n                    }\n                }\n            }\n        }\n    }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profileIcon\": \"noimage.png\",\n    \"name\": \"{{$randomUserName}}\",\n    \"email\": \"{{randomEmail}}\",\n    \"phoneNumber\": \"{{randomPhoneNumber}}\",\n    \"password\": \"123456\",\n    \"deviceType\": \"android\", //andoird/ios/web\n    \"userType\":\"guest\",\n    \"deviceId\": \"x123\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/register",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "790"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"316-QA6gRsCo66n4Sux1ZTarzM2xbb8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 07:04:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Signup successful\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"685b9f73b30954db2fa6143c\",\n            \"profileIcon\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"name\": \"Georgiana49\",\n            \"email\": \"testuser9226@gmail.com\",\n            \"phoneNumber\": \"+923016000248\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"guest\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-06-25T07:04:19.889Z\",\n            \"updatedAt\": \"2025-06-25T07:04:19.889Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"413573\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 1,\n                \"otpRequestTimestamp\": \"2025-06-25T07:04:19.873Z\",\n                \"otpExpires\": \"2025-06-25T07:14:19.875Z\"\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T07:04:19.873Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "socialAuth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"    pm.test(\"Token\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.environment.set(\"token\", jsonData.data.token);",
+									"",
+									"        pm.environment.set(\"email\", jsonData.data.basicInfo.email);",
+									"",
+									"        ",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"provider\": \"google\", //\"google\", \"facebook\", \"apple\",\n    \"socialId\": \"12345678901234567895\",\n    \"email\": \"user99213@gmail.com\",\n    \"name\": \"{{$randomFullName}}\",\n    \"deviceId\": \"device12345\",\n    \"deviceType\": \"ios\",\n    \"timezone\": \"Asia/Karachi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/social-auth",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"social-auth"
+							]
+						},
+						"description": "{\n    \"provider\": \"google\", //\"google\", \"facebook\", \"apple\",\n    \"socialId\": \"12345678901234567892\",\n    \"email\": \"use11@example.com\",\n    \"name\": \"John Doe1\",\n    \"deviceId\": \"device12345\",\n    \"deviceType\": \"ios\",\n    \"timezone\": \"Asia/Karachi\"\n}"
+					},
+					"response": [
+						{
+							"name": "socialAuth",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"provider\": \"google\", //\"google\", \"facebook\", \"apple\",\n    \"socialId\": \"12345678901234567892\",\n    \"email\": \"user9923@gmail.com\",\n    \"name\": \"{{$randomFullName}}\",\n    \"deviceId\": \"device12345\",\n    \"deviceType\": \"ios\",\n    \"timezone\": \"Asia/Karachi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/social-auth",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"social-auth"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "893"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37d-oeaSdIpbir4R1IZdmBI1VqD40XA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 12:12:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Signup successful\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"685be7c0b6ebb9803907d381\",\n            \"profileIcon\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"name\": \"Marlon Jaskolski\",\n            \"email\": \"user9923@gmail.com\",\n            \"phoneNumber\": null,\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"user\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-06-25T12:12:48.099Z\",\n            \"updatedAt\": \"2025-06-25T12:12:48.099Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T12:12:48.089Z\"\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T12:12:48.089Z\"\n            }\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODViZTdjMGI2ZWJiOTgwMzkwN2QzODEiLCJpYXQiOjE3NTA4NTM1Njh9.Qn7v5LpY6oRcj7CE4mCoKTAWhnfPXgdZD5-RitefjKQ\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "getUserProfile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/profile",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getUserProfile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}users/profile",
+									"host": [
+										"{{url}}users"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "741"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e5-Qk4/bKtwC0TzH/jT2vEsNKaGtpA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 12:12:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User fetched successfully\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"685be7c0b6ebb9803907d381\",\n            \"profileIcon\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"name\": \"Marlon Jaskolski\",\n            \"email\": \"user9923@gmail.com\",\n            \"phoneNumber\": null,\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"user\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-06-25T12:12:48.099Z\",\n            \"updatedAt\": \"2025-06-25T12:12:48.099Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T12:12:48.089Z\"\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T12:12:48.089Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "updateProfile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Guest\"\n    // \"profileIcon\" : \"noimage1.png\",\n    // \"phoneNumber\": \"+923005098445\",\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/profile",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify otp email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"",
+									"    pm.test(\"Token\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.environment.set(\"token\", jsonData.data.token);",
+									"        pm.environment.set(\"resetToken\", jsonData.data.resetToken);",
+									"        pm.collectionVariables.set(\"token\", jsonData.data.token);",
+									"        pm.collectionVariables.set(\"resetToken\", jsonData.data.resetToken);",
+									"          ",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"otp\":\"{{emailOtp}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/verify-otp/email",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"verify-otp",
+								"email"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "verify otp email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{email}}\",\n    \"otp\":\"{{emailOtp}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/verify-otp/email",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"verify-otp",
+										"email"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1010"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f2-Vzby/BJtkReeTtaqEnn0w9Hbw/8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 06:48:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP verified successfully\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"685b9bd0ea00c42e2be49547\",\n            \"profileIcon\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"name\": \"Warren.Casper\",\n            \"email\": \"testuser5662@gmail.com\",\n            \"phoneNumber\": \"+923043144842\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"user\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-06-25T06:48:48.164Z\",\n            \"updatedAt\": \"2025-06-25T06:48:59.503Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": true,\n                \"otpRequestCount\": 1,\n                \"otpRequestTimestamp\": \"2025-06-25T06:48:48.153Z\",\n                \"otpExpires\": null\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T06:48:48.153Z\"\n            }\n        },\n        \"resetToken\": \"5993171a2e24599eba61ce88a83ce1a7ac709728a6c0406d65e011cdeb6217e8\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODViOWJkMGVhMDBjNDJlMmJlNDk1NDciLCJpYXQiOjE3NTA4MzQxMzl9.z3Emormi1wa6XWcN6TKit8cDI5UBogwXcCZCqvte428\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "resend otp email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"        var jsonData = pm.response.json();",
+									"",
+									"   pm.environment.set(\"emailOtp\", jsonData.data.otp);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/resend-otp/email",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"resend-otp",
+								"email"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "resend otp email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{email}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/resend-otp/email",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"resend-otp",
+										"email"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-6mHCfj5TpXF+EHTJpHQVTIauVac\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 12:13:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP generated successfully\",\n    \"data\": {\n        \"otp\": \"009396\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "verify otp phone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"",
+									"    pm.test(\"Token\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.environment.set(\"token\", jsonData.data.token);",
+									"",
+									"          pm.environment.set(\"resetToken\", jsonData.data.resetToken);",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"{{phoneNumber}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/verify-otp/phone",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"verify-otp",
+								"phone"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "verify Otp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{email}}\",\n    \"otp\":\"{{otp}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/verifyOtp",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"verifyOtp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "866"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"362-hnLwvPjaUjoiyxI9asYYMkkmNNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 07 Sep 2024 07:08:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP verified successfully\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"66dbfbd9bdc2225f6d6ae086\",\n            \"profileIcon\": \"http://localhost:4001/api/upload/file-1724144046518.png\",\n            \"name\": \"Jameson97\",\n            \"annonymousName\": \"Breanne7\",\n            \"email\": \"haleigh87@gmail.com\",\n            \"phoneNumber\": \"426-410-7389\",\n            \"phoneNote\": \"Personal number\",\n            \"isAnonymous\": true\n        },\n        \"accountState\": {\n            \"userType\": \"user\",\n            \"status\": \"active\",\n            \"verificationStatus\": \"verified\"\n        },\n        \"profileCompletionStatus\": {\n            \"personalDetails\": false,\n            \"pregnancyDetails\": false,\n            \"lossDetails\": false,\n            \"healingDetails\": false\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2024-09-07T07:08:10.002Z\",\n            \"updatedAt\": \"2024-09-07T07:08:41.279Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"otp\": \"\",\n            \"otpUsed\": true,\n            \"otpExpires\": null\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmRiZmJkOWJkYzIyMjVmNmQ2YWUwODYiLCJpYXQiOjE3MjU2OTI5MjF9.CBmR3MlhX7tutIdAwlvKo-y9YSqKaMYqAiVaF_rX3Ds\"\n    }\n}"
+						},
+						{
+							"name": "verify otp phone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"{{phoneNumber}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/verify-otp/phone",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"verify-otp",
+										"phone"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1056"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"420-dYy6xA5/jDjbrP03/5we6bTo/Qc\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 12:13:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP verified successfully\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"685b9f73b30954db2fa6143c\",\n            \"profileIcon\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"name\": \"Georgiana49\",\n            \"email\": \"testuser9226@gmail.com\",\n            \"phoneNumber\": \"+923016000248\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"guest\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"verified\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-06-25T07:04:19.889Z\",\n            \"updatedAt\": \"2025-06-25T12:13:12.499Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"413573\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 1,\n                \"otpRequestTimestamp\": \"2025-06-25T07:04:19.873Z\",\n                \"otpExpires\": \"2025-06-25T07:14:19.875Z\"\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": true,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-06-25T07:04:19.873Z\",\n                \"otpExpires\": null\n            }\n        },\n        \"resetToken\": \"f5748e308f8cc12892ce400b9ac314954ad8e399363333837e7af1fd6f33cba9\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODViOWY3M2IzMDk1NGRiMmZhNjE0M2MiLCJpYXQiOjE3NTA4NTM1OTJ9.vFjgqPkpZJZ-Gf0lOdM1A7fnaiROBvythcLo7uukamM\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "resend otp phone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"        var jsonData = pm.response.json();",
+									"",
+									"   pm.environment.set(\"phoneNumberOtp\", jsonData.data.otp);",
+									"",
+									"",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"{{phoneNumber}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/resend-otp/phone",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"resend-otp",
+								"phone"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "resend Otp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"{{email}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/resendOtp",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"resendOtp"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "64"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"40-oye20bxRJrALgWIj0xrnLqBXatE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 07 Sep 2024 07:08:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP generated successfully\",\n    \"data\": {\n        \"otp\": \"533891\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"",
+									"    pm.test(\"Token\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        pm.environment.set(\"token\", jsonData.data.token);",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"newPassword\": \"123456\",\n    \"resetToken\" : \"{{resetToken}}\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/reset-password",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/logout",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"deviceId\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/logout",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-71uUsMgZY3FdZp9j1h5YMrBIOgg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 12:13:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logged out successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "deleteAccount",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}auth/delete-account",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"delete-account"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "subscriptions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/subscriptions",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrUpdateSubscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\" : \"plan2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/add-update-subscription",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"add-update-subscription"
+							]
+						},
+						"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Languages",
+			"item": [
+				{
+					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}languages/",
+							"host": [
+								"{{url}}languages"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}languages/",
+									"host": [
+										"{{url}}languages"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "718"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ce-I7eqFKK7F/8D0rvDNCMIWbqPPdE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 08:12:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Languages fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"685baf1bf2fd43d4a2c68c32\",\n            \"title\": \"English\",\n            \"transliteration\": \"English\",\n            \"flag\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"code\": \"en\",\n            \"country\": \"United States\",\n            \"status\": \"active\",\n            \"createdAt\": \"2025-06-25T08:11:07.991Z\",\n            \"updatedAt\": \"2025-06-25T08:11:07.991Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"685baf7e2229d1495dcebf34\",\n            \"title\": \"العربية\",\n            \"transliteration\": \"Arabic\",\n            \"flag\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n            \"code\": \"ar\",\n            \"country\": \"Saudi Arabia\",\n            \"status\": \"active\",\n            \"createdAt\": \"2025-06-25T08:12:46.192Z\",\n            \"updatedAt\": \"2025-06-25T08:12:46.192Z\",\n            \"__v\": 0\n        }\n    ],\n    \"meta\": {\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"totalRecords\": 2,\n        \"limit\": 10\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update user language",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"languageId\": \"68258ce1f7efe84ee9c25f30\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}languages/user",
+							"host": [
+								"{{url}}languages"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"item": [
+				{
+					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"categories\":[\"685c097514df675510eee252\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}home/",
+							"host": [
+								"{{url}}home"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "language",
+									"value": "ar",
+									"description": "en/ar (optional)",
+									"disabled": true
+								}
+							]
+						},
+						"description": "tags will be array of tags in each category"
+					},
+					"response": [
+						{
+							"name": "get",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"categories\":[\"685c097514df675510eee252\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}home/",
+									"host": [
+										"{{url}}home"
+									],
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "language",
+											"value": "ar",
+											"description": "en/ar (optional)",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1878"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"756-ZxaI2sORr8mOX9QAdyvfH8LD5pg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 15:24:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Data fetched successfully\",\n    \"data\": {\n        \"insight\": {\n            \"title\": \"Welcome to our platform!\",\n            \"description\": \"A brief description for the English version of the home page insights\",\n            \"lang\": \"en\",\n            \"_id\": \"685bc742a751606c9e611391\",\n            \"createdAt\": \"2025-06-25T09:54:10.013Z\",\n            \"updatedAt\": \"2025-06-25T09:54:10.013Z\",\n            \"media\": {\n                \"url\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/audio1.mp3\",\n                \"type\": \"audio\",\n                \"length\": \"00:20\",\n                \"_id\": \"685bc742a751606c9e611392\"\n            }\n        },\n        \"categories\": [\n            {\n                \"title\": \"All\",\n                \"lang\": \"en\",\n                \"order\": 0,\n                \"_id\": \"685bfcb07f3850b9feccf0af\",\n                \"createdAt\": \"2025-06-25T13:42:08.419Z\",\n                \"updatedAt\": \"2025-06-25T13:42:08.419Z\"\n            },\n            {\n                \"title\": \"Popular\",\n                \"lang\": \"en\",\n                \"order\": 0,\n                \"_id\": \"685bfd532e28fb20831a4251\",\n                \"createdAt\": \"2025-06-25T13:44:51.819Z\",\n                \"updatedAt\": \"2025-06-25T13:45:32.681Z\"\n            },\n            {\n                \"title\": \"Recently Added\",\n                \"lang\": \"en\",\n                \"order\": 0,\n                \"_id\": \"685bfdd52e28fb20831a425d\",\n                \"createdAt\": \"2025-06-25T13:47:01.525Z\",\n                \"updatedAt\": \"2025-06-25T13:47:01.525Z\"\n            },\n            {\n                \"title\": \"Peace\",\n                \"lang\": \"en\",\n                \"order\": 0,\n                \"_id\": \"685bfde12e28fb20831a4260\",\n                \"createdAt\": \"2025-06-25T13:47:13.011Z\",\n                \"updatedAt\": \"2025-06-25T13:47:53.782Z\"\n            },\n            {\n                \"title\": \"Prophet\",\n                \"lang\": \"en\",\n                \"order\": 0,\n                \"_id\": \"685c097514df675510eee252\",\n                \"createdAt\": \"2025-06-25T14:36:37.779Z\",\n                \"updatedAt\": \"2025-06-25T14:36:37.779Z\"\n            }\n        ],\n        \"stories\": [\n            {\n                \"_id\": \"685c0905583f1a171f4c11b4\",\n                \"title\": \"The Story of Prophet Yousaf (A.S.)\",\n                \"description\": \"Prophet Yousaf (A.S.) was known for his patience and wisdom. He was sold as a slave by his brothers, but later rose to power in Egypt. His story teaches us about perseverance, forgiveness, and trust in Allah's plan.\",\n                \"image\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/noimage.png\",\n                \"media\": {\n                    \"url\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/audio_prophat_story.mp3\",\n                    \"type\": \"audio\",\n                    \"length\": \"03:00\",\n                    \"_id\": \"685c0905583f1a171f4c11b5\"\n                },\n                \"lang\": \"en\",\n                \"createdAt\": \"2025-06-25T14:34:45.177Z\",\n                \"updatedAt\": \"2025-06-25T14:34:45.177Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "add view to story",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}stories/views/:storyId",
+							"host": [
+								"{{url}}stories"
+							],
+							"path": [
+								"views",
+								":storyId"
+							],
+							"variable": [
+								{
+									"key": "storyId",
+									"value": "685c009a5120ae4db78ebe79"
+								}
+							]
+						},
+						"description": "tags will be array of tags in each category"
+					},
+					"response": [
+						{
+							"name": "get",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tags\":[\"مكة\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}home/?language=ar",
+									"host": [
+										"{{url}}home"
+									],
+									"path": [
+										""
+									],
+									"query": [
+										{
+											"key": "language",
+											"value": "ar"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2017"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e1-lm+xZ1VK9GxSq6rKe+UITm1Oj0M\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 25 Jun 2025 12:11:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Coming soon\",\n    \"data\": {\n        \"insight\": {\n            \"title\": \"مرحبًا بك في منصتنا!\",\n            \"description\": \"وصف موجز للنسخة العربية من رؤى الصفحة الرئيسية\",\n            \"lang\": \"ar\",\n            \"_id\": \"685bc742a751606c9e611391\",\n            \"createdAt\": \"2025-06-25T09:54:10.013Z\",\n            \"updatedAt\": \"2025-06-25T09:54:10.013Z\",\n            \"media\": {\n                \"url\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/audio1.mp3\",\n                \"type\": \"audio\",\n                \"length\": \"00:20\",\n                \"_id\": \"685bc742a751606c9e611392\"\n            }\n        },\n        \"categories\": [\n            {\n                \"title\": \"الكل\",\n                \"lang\": \"ar\",\n                \"tags\": [\n                    \"الكل\"\n                ],\n                \"order\": 1,\n                \"_id\": \"685bd357d727ef783fcfe23e\",\n                \"createdAt\": \"2025-06-25T10:45:43.926Z\",\n                \"updatedAt\": \"2025-06-25T10:45:43.926Z\"\n            },\n            {\n                \"title\": \"الأكثر شهرة\",\n                \"lang\": \"ar\",\n                \"tags\": [\n                    \"الأكثر شهرة\"\n                ],\n                \"order\": 2,\n                \"_id\": \"685bd3c9d727ef783fcfe247\",\n                \"createdAt\": \"2025-06-25T10:47:37.673Z\",\n                \"updatedAt\": \"2025-06-25T10:47:37.673Z\"\n            },\n            {\n                \"title\": \"أضيف حديثًا\",\n                \"lang\": \"ar\",\n                \"tags\": [\n                    \"أضيف حديثًا\"\n                ],\n                \"order\": 3,\n                \"_id\": \"685bd418d727ef783fcfe250\",\n                \"createdAt\": \"2025-06-25T10:48:56.344Z\",\n                \"updatedAt\": \"2025-06-25T10:48:56.344Z\"\n            },\n            {\n                \"title\": \"سلام\",\n                \"lang\": \"ar\",\n                \"tags\": [\n                    \"سلام\",\n                    \"تلاوات\",\n                    \"قرآن\",\n                    \"هادئة\",\n                    \"مسلم\"\n                ],\n                \"order\": 4,\n                \"_id\": \"685bd42fd727ef783fcfe253\",\n                \"createdAt\": \"2025-06-25T10:49:19.357Z\",\n                \"updatedAt\": \"2025-06-25T10:51:10.298Z\"\n            }\n        ],\n        \"stories\": [\n            {\n                \"title\": \"قصة النبي محمد (صلى الله عليه وسلم)\",\n                \"description\": \"وُلد النبي محمد (صلى الله عليه وسلم) في مكة، وتلقى أول وحي له في سن الأربعين، ونشر رسالة الإسلام حتى وفاته. وتعد تعاليمه وحياته مرشدًا للمسلمين في جميع أنحاء العالم.\",\n                \"lang\": \"ar\",\n                \"tags\": [\n                    \"النبي محمد\",\n                    \"الإسلام\",\n                    \"مكة\"\n                ],\n                \"_id\": \"685bdb1340e50d78bc1d68d6\",\n                \"media\": {\n                    \"url\": \"https://muslimappbucket.s3.eu-north-1.amazonaws.com/audio_prophat_story.mp3\",\n                    \"type\": \"audio\",\n                    \"length\": \"03:00\",\n                    \"_id\": \"685bdb1340e50d78bc1d68d7\"\n                },\n                \"createdAt\": \"2025-06-25T11:18:43.451Z\",\n                \"updatedAt\": \"2025-06-25T11:18:43.451Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Settings",
+			"item": [
+				{
+					"name": "support requests",
+					"item": [
+						{
+							"name": "post",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"subject\": \"Issue with the app login\",\n  \"message\": \"I am unable to log into the app with my credentials. Please assist.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}support",
+									"host": [
+										"{{url}}support"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Notifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}notifications?page=1&limit=10",
+							"host": [
+								"{{url}}notifications"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "termsAndConditions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}settings/termsAndConditions",
+									"host": [
+										"{{url}}settings"
+									],
+									"path": [
+										"termsAndConditions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-Wv67qOoegoP0fOYvOunGPXEUDlw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 07 Sep 2024 07:03:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Terms and Conditions fetched successfully\",\n    \"data\": {\n        \"_id\": \"66d58d5172e16ac86d740e6c\",\n        \"terms_and_conditions\": \"Your terms and conditions text here.1\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "termsAndConditions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}settings/terms-conditions",
+							"host": [
+								"{{url}}settings"
+							],
+							"path": [
+								"terms-conditions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "termsAndConditions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}settings/termsAndConditions",
+									"host": [
+										"{{url}}settings"
+									],
+									"path": [
+										"termsAndConditions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "160"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a0-Wv67qOoegoP0fOYvOunGPXEUDlw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 07 Sep 2024 07:03:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Terms and Conditions fetched successfully\",\n    \"data\": {\n        \"_id\": \"66d58d5172e16ac86d740e6c\",\n        \"terms_and_conditions\": \"Your terms and conditions text here.1\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "aboutUs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}settings/about-us",
+							"host": [
+								"{{url}}settings"
+							],
+							"path": [
+								"about-us"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "aboutUs",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}settings/aboutUs",
+									"host": [
+										"{{url}}settings"
+									],
+									"path": [
+										"aboutUs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "125"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7d-io6+DluyQKNVfPU4wbP7zrwLpPo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 07 Sep 2024 07:03:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"About Us fetched successfully\",\n    \"data\": {\n        \"_id\": \"66d58d5172e16ac86d740e6c\",\n        \"about_us\": \"Information about us here.\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "privacyPolicy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}settings/privacy-policy",
+							"host": [
+								"{{url}}settings"
+							],
+							"path": [
+								"privacy-policy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "faqs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}settings/faqs",
+							"host": [
+								"{{url}}settings"
+							],
+							"path": [
+								"faqs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "Upload file s3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>File</th>",
+									"        <th>File URL</th>",
+									"        <th>File Extension</th>",
+									"    </tr>",
+									"    ",
+									"    {{#each response.data}}",
+									"        <tr>",
+									"            <td>{{file}}</td>",
+									"            <td>{{fileUrl}}</td>",
+									"            <td>{{fileExtension}}</td>",
+									"        </tr>",
+									"    {{/each}}",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "image/png",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/Users/s/Downloads/mstr_card_classic.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}upload/s3",
+							"host": [
+								"{{url}}upload"
+							],
+							"path": [
+								"s3"
+							]
+						},
+						"description": "Uploading single/multiple files is possible"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete file s3",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "image/png",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fileKey\": \"ef2ffde1-3a3a-4eac-9004-e4b3f1a04f45.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}upload/s3",
+							"host": [
+								"{{url}}upload"
+							],
+							"path": [
+								"s3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete multiple files s3",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "image/png",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fileKey\": [\"0831007f-a726-46b4-bb29-24830735d093.png\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}upload/s3",
+							"host": [
+								"{{url}}upload"
+							],
+							"path": [
+								"s3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample crud (ignore)",
+			"item": [
+				{
+					"name": "get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}tools/",
+							"host": [
+								"{{url}}tools"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}endpoint/:id",
+							"host": [
+								"{{url}}endpoint"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test name\",\n  \"description\": \"Test body\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}endpoint/",
+							"host": [
+								"{{url}}endpoint"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test name updated\",\n  \"description\": \"Test body updated\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}endpoint/:id",
+							"host": [
+								"{{url}}endpoint"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}endpoint/:id",
+							"host": [
+								"{{url}}endpoint"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin Access Only",
+			"item": [
+				{
+					"name": "Dev",
+					"item": [
+						{
+							"name": "Login User1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"",
+											"",
+											"    pm.test(\"Token\", function () {",
+											"        var jsonData = pm.response.json();",
+											"        pm.environment.set(\"token\", jsonData.data.token);",
+											"",
+											"        pm.environment.set(\"email\", jsonData.data.basicInfo.email);",
+											"",
+											"        pm.environment.set(\"phoneNumber\", jsonData.data.basicInfo.phoneNumber);",
+											"",
+											"        let requestBody = JSON.parse(pm.request.body.raw);",
+											"        pm.environment.set(\"password\", requestBody.password);",
+											"        ",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \t\"email\": \"testuser2@gmail.com\",\n\t\"password\": \"123456\",\n\t\"deviceType\": \"android\", //andoird/ios\n\t\"deviceId\": \"ciMKqgnjRiaQvxj2Q9T5_g:APA91bF3LLhH7TQoNny1mS-c2iK_PZ4vZXG8bKSavzUuAqQ8A2ipLSf6yWzMhvNCr9fH44mPVUukNytAYQtorUJGo2FYkdV4yusDDL_-fri0yKZ18THsh8w1hVlJ_5a_YWNFbXO479ci\", //device id from firebase fcm\n\t\"timezone\": \"Asia/Karachi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/login",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login User2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"",
+											"",
+											"    pm.test(\"Token\", function () {",
+											"        var jsonData = pm.response.json();",
+											"        pm.environment.set(\"token\", jsonData.data.token);",
+											"",
+											"        pm.environment.set(\"email\", jsonData.data.basicInfo.email);",
+											"",
+											"        pm.environment.set(\"phoneNumber\", jsonData.data.basicInfo.phoneNumber);",
+											"",
+											"        let requestBody = JSON.parse(pm.request.body.raw);",
+											"        pm.environment.set(\"password\", requestBody.password);",
+											"        ",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \t\"email\": \"heroj35277@andinews.com\",\n\t\"password\": \"123456\",\n\t\"deviceType\": \"android\", //andoird/ios\n\t\"deviceId\": \"ciMKqgnjRiaQvxj2Q9T5_g:APA91bF3LLhH7TQoNny1mS-c2iK_PZ4vZXG8bKSavzUuAqQ8A2ipLSf6yWzMhvNCr9fH44mPVUukNytAYQtorUJGo2FYkdV4yusDDL_-fri0yKZ18THsh8w1hVlJ_5a_YWNFbXO479ci\", //device id from firebase fcm\n\t\"timezone\": \"Asia/Karachi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}auth/login",
+									"host": [
+										"{{url}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Utils",
+					"item": [
+						{
+							"name": "bulk insert",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-admin-creation-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3MjQ1NDgzMTIsImV4cCI6MTcyNDU1MTkxMn0.4boSGYHU34L2rH3RbSPJKdcWTgFwm6invgwNAyuEsNM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"values\": [\n        { \"need\": \"Emotional Support\" },\n        { \"need\": \"Certified Counseling\", \"subTitle\": \"Provided by licensed professionals\" },\n        { \"need\": \"AngelsBond Counseling\", \"subTitle\": \"Peer support by AngelsBond Team who have experienced pregnancy loss\" },\n        { \"need\": \"Support Group\" },\n        { \"need\": \"Meditation and Mindfulness\" },\n        { \"need\": \"Relaxation Techniques\" },\n        { \"need\": \"Physical Health Support\" }\n    ],\n    \"collectionName\": \"SupportNeed\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}util/bulkInsert",
+									"host": [
+										"{{url}}util"
+									],
+									"path": [
+										"bulkInsert"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete collection",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-admin-creation-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3MjQ1NDgzMTIsImV4cCI6MTcyNDU1MTkxMn0.4boSGYHU34L2rH3RbSPJKdcWTgFwm6invgwNAyuEsNM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"collectionName\": \"users\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}util/deleteCollection",
+									"host": [
+										"{{url}}util"
+									],
+									"path": [
+										"deleteCollection"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Communication/Email/Notification",
+					"item": [
+						{
+							"name": "send Email sGrid",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"NextGen App\",\n  \"emails\": [\"cwaliimrandev@gmail.com\"],\n  \"subject\": \"Test email by NextGen\",\n  \"body\": \"<p>This is the body of the email.</p>\",\n  \"config\": {\n    \"fromEmail\": \"cwaliimran@gmail.com\",\n    \"isHtml\": true\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}communications/send-email-sgrid",
+									"host": [
+										"{{url}}communications"
+									],
+									"path": [
+										"send-email-sgrid"
+									]
+								},
+								"description": "### Send Email\n\nThis endpoint allows you to send an email to the specified recipients.\n\n#### Request Body\n\n- title (string, optional): The title of the email.\n    \n- emails (array of strings): The list of email addresses to which the email will be sent.\n    \n- subject (string, required): The subject of the email.\n    \n- body (string, required): The body content of the email.\n    \n- config (object):\n    \n    - fromEmail (string, required): The sender's email address.\n        \n    - isHtml (boolean, required): Indicates whether the email body is in HTML format.\n        \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "sendOtp Pinpoint",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"phoneNumber\": \"+923005098444\",\n//    \"phoneNumber\": \"+923204797713\",\n  \"otp\": \"123544\"\n  \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}communications/send-otp-pin-point",
+									"host": [
+										"{{url}}communications"
+									],
+									"path": [
+										"send-otp-pin-point"
+									]
+								},
+								"description": "### Send Email\n\nThis endpoint allows you to send an email to the specified recipients.\n\n#### Request Body\n\n- title (string, optional): The title of the email.\n    \n- emails (array of strings): The list of email addresses to which the email will be sent.\n    \n- subject (string, required): The subject of the email.\n    \n- body (string, required): The body content of the email.\n    \n- config (object):\n    \n    - fromEmail (string, required): The sender's email address.\n        \n    - isHtml (boolean, required): Indicates whether the email body is in HTML format.\n        \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "send Email AWS ses",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"AngelsBond App\",\n  \"emails\": [\"cwaliimrandev@gmail.com\"],\n  \"subject\": \"Test email by AngelsBond App\",\n  \"body\": \"<p>This is the body of the email.</p>\",\n  \"config\": {\n    \"fromEmail\": \"support@angelsbond.com\",\n    \"isHtml\": true\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}communications/send-email-aws",
+									"host": [
+										"{{url}}communications"
+									],
+									"path": [
+										"send-email-aws"
+									]
+								},
+								"description": "### Send Email\n\nThis endpoint allows you to send an email to the specified recipients.\n\n#### Request Body\n\n- title (string, optional): The title of the email.\n    \n- emails (array of strings): The list of email addresses to which the email will be sent.\n    \n- subject (string, required): The subject of the email.\n    \n- body (string, required): The body content of the email.\n    \n- config (object):\n    \n    - fromEmail (string, required): The sender's email address.\n        \n    - isHtml (boolean, required): Indicates whether the email body is in HTML format.\n        \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "send Email Brevo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Muslim App\",\n  \"emails\": [\"cwaliimrandev@gmail.com\"],\n  \"subject\": \"Test email by Muslim App\",\n  \"body\": \"<p>This is the body of the email.</p>\",\n  \"config\": {\n    \"fromEmail\": \"support@muslimappapp.com\",\n    \"isHtml\": true\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}communications/send-email-brevo",
+									"host": [
+										"{{url}}communications"
+									],
+									"path": [
+										"send-email-brevo"
+									]
+								},
+								"description": "### Send Email\n\nThis endpoint allows you to send an email to the specified recipients.\n\n#### Request Body\n\n- title (string, optional): The title of the email.\n    \n- emails (array of strings): The list of email addresses to which the email will be sent.\n    \n- subject (string, required): The subject of the email.\n    \n- body (string, required): The body content of the email.\n    \n- config (object):\n    \n    - fromEmail (string, required): The sender's email address.\n        \n    - isHtml (boolean, required): Indicates whether the email body is in HTML format.\n        \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "send Notification",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"recipients\": [\n    {\n      \"deviceId\": \"f80WhDR5TKiJtjLcv_4ciM:APA91bF0j6xEXW6FQGpRYvQZTFTK7590RjUjsARzzjfhIxoClr1c1b2Jyp3UqCOErUy6660dxmPt4boxPNLLQ2lRs3v40Z-ZYtaPCWPpu-4SSsvoC9l_kJk\",\n      \"deviceType\": \"android\"\n    },\n    {\n      \"deviceId\": \"fcm_token_2\",\n      \"deviceType\": \"ios\"\n    },\n    {\n      \"deviceId\": \"fcm_token_3\",\n      \"deviceType\": \"android\"\n    }\n  ],\n  \"title\": \"Push Notification\",\n  \"body\": \"Your custom notification message here\",\n  \"data\":{\n    \"type\": \"message\"\n  }\n}\n    ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}communications/send-notification",
+									"host": [
+										"{{url}}communications"
+									],
+									"path": [
+										"send-notification"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin Panel",
+					"item": [
+						{
+							"name": "Auth",
+							"item": [
+								{
+									"name": "Admin Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"",
+													"    pm.test(\"Token\", function () {",
+													"        var jsonData = pm.response.json();",
+													"        pm.environment.set(\"adminToken\", jsonData.data.token);        ",
+													"    });",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-admin-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3NTA4MzE5ODIsImV4cCI6MTc1MDgzNTU4Mn0.LZw3aYSHZ1LHgM6zYqvXGKqspG1RTpvfRp-e-hYvTSY",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"password\": \"mus#la9$.m\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"DDyYYYdkdashd8d482Dhd0e8djf\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\",\n    \"userType\":\"admin\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}auth/login",
+											"host": [
+												"{{url}}auth"
+											],
+											"path": [
+												"login"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Admin Login",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "x-admin-access-token",
+														"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3NDcyMjg5MzcsImV4cCI6MTc0NzIzMjUzN30.J9IBAVQhLtMwLEt1dtSUVrbbW3MiC9Rm9LRwYlBR-oU",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"password\": \"yapp#gna10Lng\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"DDyYYYdkdashd8d482Dhd0e8djf\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}auth/login",
+													"host": [
+														"{{url}}auth"
+													],
+													"path": [
+														"login"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "909"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"38d-0tsN1z4c27X7l4WQpYburpLFxbw\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 14 May 2025 15:28:48 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Login success\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"6824b63f106a75c1326fb7db\",\n            \"profileIcon\": \"https://muslimappappbucket.s3.us-east-1.amazonaws.com/noimage.png\",\n            \"name\": \"Muslim App Admin\",\n            \"email\": \"admin@muslimapp.com\",\n            \"phoneNumber\": \"+923004958434\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"admin\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-05-14T15:26:55.510Z\",\n            \"updatedAt\": \"2025-05-14T15:28:02.367Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": true,\n                \"otpRequestCount\": 11,\n                \"otpRequestTimestamp\": \"2025-05-14T15:26:55.502Z\",\n                \"otpExpires\": null\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-05-14T15:26:55.502Z\"\n            }\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0YjYzZjEwNmE3NWMxMzI2ZmI3ZGIiLCJpYXQiOjE3NDcyMzY1Mjh9.DX5J_prIB-YFl4n3JyAByW7mrBr4n413_xNkzsv0n-E\"\n    }\n}"
+										},
+										{
+											"name": "Admin Login",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "x-admin-access-token",
+														"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3NDcyMjg5MzcsImV4cCI6MTc0NzIzMjUzN30.J9IBAVQhLtMwLEt1dtSUVrbbW3MiC9Rm9LRwYlBR-oU",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"password\": \"yapp#gna10Lng\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"DDyYYYdkdashd8d482Dhd0e8djf\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}auth/login",
+													"host": [
+														"{{url}}auth"
+													],
+													"path": [
+														"login"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "62"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"3e-9CY1cw9Oql+2wOIkBbOxdZZ3ad4\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 14 May 2025 15:29:47 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"No account found with the provided email address\"\n}"
+										},
+										{
+											"name": "Admin Login",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "x-admin-access-token",
+														"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3NDcyMjg5MzcsImV4cCI6MTc0NzIzMjUzN30.J9IBAVQhLtMwLEt1dtSUVrbbW3MiC9Rm9LRwYlBR-oU",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"password\": \"yapp#gna10Lng\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"DDyYYYdkdashd8d482Dhd0e8djf\", //device id from firebase fcm\n    \"timezone\": \"Asia/Karachi\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}auth/login",
+													"host": [
+														"{{url}}auth"
+													],
+													"path": [
+														"login"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "50"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"32-RdTktnABhMZMy5OIU4u/2WyPKHk\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 14 May 2025 15:30:05 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Incorrect password. Please try again\"\n}"
+										}
+									]
+								},
+								{
+									"name": "reset Password Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"",
+													"    pm.test(\"Token\", function () {",
+													"        var jsonData = pm.response.json();",
+													"        pm.environment.set(\"token\", jsonData.data.token);",
+													"    });",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"newPassword\": \"dnobslegna10\",\n    \"resetToken\" : \"bfe82dd6374cd5e80ba84d2e15cab0229cca62e3925a4ecc4060b23f69af0ed8\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}auth/resetPassword",
+											"host": [
+												"{{url}}auth"
+											],
+											"path": [
+												"resetPassword"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Admin Signup",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(201);",
+													"",
+													"",
+													"    pm.test(\"Token\", function () {",
+													"        var jsonData = pm.response.json();",
+													"        pm.environment.set(\"adminToken\", jsonData.data.token);",
+													"",
+													"        pm.environment.set(\"adminEmail\", jsonData.data.user.email);",
+													"",
+													"        pm.environment.set(\"phoneNumber\", jsonData.data.user.phoneNumber);",
+													"",
+													"        let requestBody = JSON.parse(pm.request.body.raw);",
+													"        pm.environment.set(\"password\", requestBody.password);",
+													"        ",
+													"    });",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-admin-access-token",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3NTA4MzE5ODIsImV4cCI6MTc1MDgzNTU4Mn0.LZw3aYSHZ1LHgM6zYqvXGKqspG1RTpvfRp-e-hYvTSY",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Muslim App Admin\",\n    \"email\": \"{{adminEmail}}\",\n    \"phoneNumber\": \"\",\n    \"password\": \"mus#la9$.m\",\n    \"userType\": \"admin\", //  \"user\" or \"admin\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"123\", //device id from firebase fcm\n    \"timezone\":\"Asia/Karachi\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}auth/register",
+											"host": [
+												"{{url}}auth"
+											],
+											"path": [
+												"register"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Admin Signup",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "x-admin-access-token",
+														"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4tY3JlYXRpb24iLCJpYXQiOjE3NDcyMjg5MzcsImV4cCI6MTc0NzIzMjUzN30.J9IBAVQhLtMwLEt1dtSUVrbbW3MiC9Rm9LRwYlBR-oU",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Muslim App Admin\",\n    \"email\": \"{{adminEmail}}\",\n    \"phoneNumber\": \"+923004958434\",\n    \"password\": \"yapp#gna10Lng\",\n    \"userType\": \"admin\", //  \"user\" or \"admin\",\n    \"deviceType\": \"android\", //andoird/ios\n    \"deviceId\": \"123\", //device id from firebase fcm\n    \"timezone\":\"Asia/Karachi\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}auth/register",
+													"host": [
+														"{{url}}auth"
+													],
+													"path": [
+														"register"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "781"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"30d-14imiIB88bZdJxrJjYvpvMqU/Tw\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 14 May 2025 15:27:29 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Signup successful\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"6824b63f106a75c1326fb7db\",\n            \"profileIcon\": \"https://muslimappappbucket.s3.us-east-1.amazonaws.com/noimage.png\",\n            \"name\": \"Muslim App Admin\",\n            \"email\": \"admin@muslimapp.com\",\n            \"phoneNumber\": \"+923004958434\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"admin\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"pending\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-05-14T15:26:55.510Z\",\n            \"updatedAt\": \"2025-05-14T15:27:29.281Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"665927\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 11,\n                \"otpRequestTimestamp\": \"2025-05-14T15:26:55.502Z\",\n                \"otpExpires\": \"2025-05-14T15:37:29.279Z\"\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-05-14T15:26:55.502Z\"\n            }\n        }\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "verify Otp Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"",
+													"",
+													"    pm.test(\"Token\", function () {",
+													"        var jsonData = pm.response.json();",
+													"        pm.environment.set(\"adminToken\", jsonData.data.token);",
+													"",
+													"          pm.environment.set(\"resetToken\", jsonData.data.resetToken);",
+													"    });",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"otp\":\"126457\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}auth/verify-otp/email",
+											"host": [
+												"{{url}}auth"
+											],
+											"path": [
+												"verify-otp",
+												"email"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "verify Otp Admin",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"email\": \"{{adminEmail}}\",\n    \"otp\":\"665927\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}auth/verify-otp/email",
+													"host": [
+														"{{url}}auth"
+													],
+													"path": [
+														"verify-otp",
+														"email"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "1001"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"3e9-tMMZKpgeOH/kvczdxoKjViCwI1c\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 14 May 2025 15:28:02 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"OTP verified successfully\",\n    \"data\": {\n        \"basicInfo\": {\n            \"_id\": \"6824b63f106a75c1326fb7db\",\n            \"profileIcon\": \"https://muslimappappbucket.s3.us-east-1.amazonaws.com/noimage.png\",\n            \"name\": \"Muslim App Admin\",\n            \"email\": \"admin@muslimapp.com\",\n            \"phoneNumber\": \"+923004958434\",\n            \"language\": \"en\"\n        },\n        \"accountState\": {\n            \"userType\": \"admin\",\n            \"status\": \"active\",\n            \"verificationStatus\": {\n                \"email\": \"verified\",\n                \"phoneNumber\": \"pending\"\n            }\n        },\n        \"metadata\": {\n            \"timezone\": \"Asia/Karachi\",\n            \"createdAt\": \"2025-05-14T15:26:55.510Z\",\n            \"updatedAt\": \"2025-05-14T15:28:02.367Z\",\n            \"__v\": 0\n        },\n        \"otpInfo\": {\n            \"emailOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": true,\n                \"otpRequestCount\": 11,\n                \"otpRequestTimestamp\": \"2025-05-14T15:26:55.502Z\",\n                \"otpExpires\": null\n            },\n            \"phoneNumberOtp\": {\n                \"otp\": \"\",\n                \"otpUsed\": false,\n                \"otpRequestCount\": 0,\n                \"otpRequestTimestamp\": \"2025-05-14T15:26:55.502Z\"\n            }\n        },\n        \"resetToken\": \"1b7c87ce98f7d28766f2cc654c825cd731067168ce9ee637f372a8a447709648\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODI0YjYzZjEwNmE3NWMxMzI2ZmI3ZGIiLCJpYXQiOjE3NDcyMzY0ODJ9.krL3_Yu5PdAw907X9jHlz4D8nbtHRhg_2nekZ2PYNdc\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "resend OTP Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n   \"email\": \"{{adminEmail}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}auth/resend-otp/email",
+											"host": [
+												"{{url}}auth"
+											],
+											"path": [
+												"resend-otp",
+												"email"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "resend OTP Admin",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n   \"email\": \"{{adminEmail}}\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}auth/resend-otp/email",
+													"host": [
+														"{{url}}auth"
+													],
+													"path": [
+														"resend-otp",
+														"email"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "64"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"40-SEh1UmkE2OSnXd8Qo4hAu+REgLI\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 14 May 2025 15:29:01 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"OTP generated successfully\",\n    \"data\": {\n        \"otp\": \"459520\"\n    }\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Support Requests",
+							"item": [
+								{
+									"name": "support-requests",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}admin/support-requests?status=pending&page=1",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"support-requests"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "pending",
+													"description": "'pending', 'responded', 'resolved', 'closed'"
+												},
+												{
+													"key": "page",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "put",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"status\": \"closed\" //'pending', 'responded', 'resolved', 'closed'\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/support-requests/6715f380f5c42af5b8843a72",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"support-requests",
+												"6715f380f5c42af5b8843a72"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/support-requests/670e5488107ae061c6b548c5",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"support-requests",
+												"670e5488107ae061c6b548c5"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "contactUs",
+							"item": [
+								{
+									"name": "get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}admin/contact-us?page=1&limit=10",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"contact-us"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												},
+												{
+													"key": "status",
+													"value": "closed",
+													"description": "'pending', 'responded', 'resolved', 'closed'",
+													"disabled": true
+												},
+												{
+													"key": "keyword",
+													"value": "this",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "put",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"status\": \"closed\" //'pending', 'responded', 'resolved', 'closed'\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/contact-us/6718c53c810f6e2d4e509eaa",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"contact-us",
+												"6718c53c810f6e2d4e509eaa"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/contact-us/670e5299abdb4d38a49a0de3",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"contact-us",
+												"670e5299abdb4d38a49a0de3"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Faq's",
+							"item": [
+								{
+									"name": "get",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/faqs",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"faqs"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "get",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{url}}admin/faqs",
+													"host": [
+														"{{url}}admin"
+													],
+													"path": [
+														"faqs"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "327"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"147-YLG42IIaNjQX78OWq54MiaYO1jQ\""
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 14 Jan 2025 15:24:31 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Faqs fetched successfully\",\n    \"data\": [\n        {\n            \"_id\": \"6786816732aa1eb77e7c82dd\",\n            \"question\": \"How to use app\",\n            \"answer\": \"Follow below link.. http://youtube.com/learnborrow\",\n            \"createdAt\": \"2025-01-14T15:23:19.099Z\",\n            \"updatedAt\": \"2025-01-14T15:23:56.073Z\",\n            \"__v\": 0\n        }\n    ],\n    \"meta\": {\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"totalRecords\": 1,\n        \"limit\": 10\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "add",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"question\": \"How to use app\",\n    \"answer\": \"Follow below link.. http://youtube.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/faqs",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"faqs"
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": [
+										{
+											"name": "add",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"question\": \"How to use app\",\n    \"answer\": \"Follow below link.. http://youtube.com\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}admin/faqs",
+													"host": [
+														"{{url}}admin"
+													],
+													"path": [
+														"faqs"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "244"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"f4-7aOUgRsuAlXBRIedVK7Vr9xvwDo\""
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 14 Jan 2025 15:24:03 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Faq created successfully\",\n    \"data\": {\n        \"question\": \"How to use app\",\n        \"answer\": \"Follow below link.. http://youtube.com\",\n        \"_id\": \"6786819332aa1eb77e7c82e3\",\n        \"createdAt\": \"2025-01-14T15:24:03.366Z\",\n        \"updatedAt\": \"2025-01-14T15:24:03.366Z\",\n        \"__v\": 0\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"question\": \"How to use app\",\n    \"answer\": \"Follow below link.. http://youtube.com/learnborrow\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/faqs/:id",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"faqs",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "6786816732aa1eb77e7c82dd"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": [
+										{
+											"name": "update",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"question\": \"How to use app\",\n    \"answer\": \"Follow below link.. http://youtube.com/learnborrow\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}admin/faqs/:id",
+													"host": [
+														"{{url}}admin"
+													],
+													"path": [
+														"faqs",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "6786816732aa1eb77e7c82dd"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "256"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"100-MOfxqXQ5WKTNYSVcusN1473aGhc\""
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 14 Jan 2025 15:24:25 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Faq updated successfully\",\n    \"data\": {\n        \"_id\": \"6786816732aa1eb77e7c82dd\",\n        \"question\": \"How to use app\",\n        \"answer\": \"Follow below link.. http://youtube.com/learnborrow\",\n        \"createdAt\": \"2025-01-14T15:23:19.099Z\",\n        \"updatedAt\": \"2025-01-14T15:23:56.073Z\",\n        \"__v\": 0\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "delete",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}admin/faqs/:id",
+											"host": [
+												"{{url}}admin"
+											],
+											"path": [
+												"faqs",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "6786819332aa1eb77e7c82e3"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": [
+										{
+											"name": "delete",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}admin/faqs/:id",
+													"host": [
+														"{{url}}admin"
+													],
+													"path": [
+														"faqs",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "6786819332aa1eb77e7c82e3"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "38"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"26-Pb+ir59dGG6u55moIogOLVi9FiI\""
+												},
+												{
+													"key": "Date",
+													"value": "Tue, 14 Jan 2025 15:24:12 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Faq deleted successfully\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Languages",
+							"item": [
+								{
+									"name": "get",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}languages/",
+											"host": [
+												"{{url}}languages"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "add",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"English\",\n  \"code\": \"en\",\n  \"transliteration\":\"English\",\n  \"country\": \"United States\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}languages/",
+											"host": [
+												"{{url}}languages"
+											],
+											"path": [
+												""
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								},
+								{
+									"name": "update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \n  \"country\":\"Pakistan\",\n  \"flag\":\"flag_pk.png\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}languages/:id",
+											"host": [
+												"{{url}}languages"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "68258c0c782e3dd19883b131"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}languages/:id",
+											"host": [
+												"{{url}}languages"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "682aff32650f2b4593792d13"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Settings",
+							"item": [
+								{
+									"name": "create settings",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"terms_and_conditions\": \"Your terms and conditions text here.\",\n    \"about_us\": \"Information about us here.\",\n    \"privacy_policy\": \"Your privacy policy text here.\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}settings/create",
+											"host": [
+												"{{url}}settings"
+											],
+											"path": [
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update settings",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"terms_and_conditions\": \"Your terms and conditions text here.1\",\n    \"about_us\": \"Information about us here.\",\n    \"privacy_policy\": \"Your privacy policy text here.\",\n    \"faqs\": \"Faqs here\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}settings/update/6824bdc0e357e7fe94d674db",
+											"host": [
+												"{{url}}settings"
+											],
+											"path": [
+												"update",
+												"6824bdc0e357e7fe94d674db"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Home Page Insights",
+							"item": [
+								{
+									"name": "get",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}home-page-insights/?page=1&limit=10",
+											"host": [
+												"{{url}}home-page-insights"
+											],
+											"path": [
+												""
+											],
+											"query": [
+												{
+													"key": "language",
+													"value": "en",
+													"disabled": true
+												},
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "add",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"insights\": [\n    {\n      \"lang\": \"en\",\n      \"title\": \"Welcome to our platform!\",\n      \"description\": \"A brief description for the English version of the home page insights\"\n    },\n    {\n      \"lang\": \"ar\",\n      \"title\": \"مرحبًا بك في منصتنا!\",\n      \"description\": \"وصف موجز للنسخة العربية من رؤى الصفحة الرئيسية\"\n    }\n  ],\n  \"media\":\n    {\n      \"url\": \"audio1.mp3\",\n      \"type\": \"audio\",\n      \"length\":\"00:20\"\n    }\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}home-page-insights/",
+											"host": [
+												"{{url}}home-page-insights"
+											],
+											"path": [
+												""
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								},
+								{
+									"name": "update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"insights\": [\n    {\n      \"lang\": \"en\",\n      \"text\": \"Welcome to our platform!\",\n      \"description\": \"A brief description for the English version of the home page insights\"\n    },\n    {\n      \"lang\": \"ar\",\n      \"text\": \"مرحبًا بك في منصتنا!\",\n      \"description\": \"وصف موجز للنسخة العربية من رؤى الصفحة الرئيسية\"\n    }\n  ],\n  \"media\":\n    {\n      \"url\": \"audio1.mp3\",\n      \"type\": \"audio\",\n      \"length\":\"00:40\"\n    }\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}home-page-insights/:id",
+											"host": [
+												"{{url}}home-page-insights"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "685bb601f083484901fed64d"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}home-page-insights/:id",
+											"host": [
+												"{{url}}home-page-insights"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "685bc710a751606c9e611381"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Categories/filters",
+							"item": [
+								{
+									"name": "get",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}categories/?page=1&limit=10",
+											"host": [
+												"{{url}}categories"
+											],
+											"path": [
+												""
+											],
+											"query": [
+												{
+													"key": "language",
+													"value": "ar",
+													"disabled": true
+												},
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "get",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}categories/?page=1&limit=10",
+													"host": [
+														"{{url}}categories"
+													],
+													"path": [
+														""
+													],
+													"query": [
+														{
+															"key": "language",
+															"value": "ar",
+															"disabled": true
+														},
+														{
+															"key": "page",
+															"value": "1"
+														},
+														{
+															"key": "limit",
+															"value": "10"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "772"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"304-KXqfNcNEpamRDAioFfBogEsYzbE\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 25 Jun 2025 13:47:57 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Categories found\",\n    \"data\": [\n        {\n            \"_id\": \"685bfcb07f3850b9feccf0af\",\n            \"title\": \"All\",\n            \"lang\": \"en\",\n            \"order\": 1,\n            \"key\": \"all\",\n            \"createdAt\": \"2025-06-25T13:42:08.419Z\",\n            \"updatedAt\": \"2025-06-25T13:42:08.419Z\"\n        },\n        {\n            \"_id\": \"685bfd532e28fb20831a4251\",\n            \"title\": \"Popular\",\n            \"lang\": \"en\",\n            \"order\": 2,\n            \"key\": \"popular\",\n            \"createdAt\": \"2025-06-25T13:44:51.819Z\",\n            \"updatedAt\": \"2025-06-25T13:45:32.681Z\"\n        },\n        {\n            \"_id\": \"685bfdd52e28fb20831a425d\",\n            \"title\": \"Recently Added\",\n            \"lang\": \"en\",\n            \"order\": 3,\n            \"key\": \"recent\",\n            \"createdAt\": \"2025-06-25T13:47:01.525Z\",\n            \"updatedAt\": \"2025-06-25T13:47:01.525Z\"\n        },\n        {\n            \"_id\": \"685bfde12e28fb20831a4260\",\n            \"title\": \"Peace\",\n            \"lang\": \"en\",\n            \"order\": 0,\n            \"key\": \"\",\n            \"createdAt\": \"2025-06-25T13:47:13.011Z\",\n            \"updatedAt\": \"2025-06-25T13:47:53.782Z\"\n        }\n    ],\n    \"meta\": {\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"totalRecords\": 4,\n        \"limit\": 10\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "add",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"key\": \"\",\n    \"category\": [\n        {\n            \"lang\": \"en\",\n            \"title\": \"Prophet\"\n        },\n        {\n            \"lang\": \"ar\",\n            \"title\": \"النبي\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}categories/",
+											"host": [
+												"{{url}}categories"
+											],
+											"path": [
+												""
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": [
+										{
+											"name": "add",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"key\": \"recent\",\n    \"order\": \"3\",\n    \"category\": [\n        {\n            \"lang\": \"en\",\n            \"title\": \"Recently Added\"\n        },\n        {\n            \"lang\": \"ar\",\n            \"title\": \"أضيف حديثًا\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}categories/",
+													"host": [
+														"{{url}}categories"
+													],
+													"path": [
+														""
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "281"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"119-AcOZ5RBdmtC/375oPv5DUXKGdhA\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 25 Jun 2025 13:47:13 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Category created\",\n    \"data\": {\n        \"category\": [\n            {\n                \"lang\": \"en\",\n                \"title\": \"Recently Added\"\n            },\n            {\n                \"lang\": \"ar\",\n                \"title\": \"أضيف حديثًا\"\n            }\n        ],\n        \"key\": \"recent\",\n        \"order\": 3,\n        \"_id\": \"685bfde12e28fb20831a4260\",\n        \"createdAt\": \"2025-06-25T13:47:13.011Z\",\n        \"updatedAt\": \"2025-06-25T13:47:13.011Z\",\n        \"__v\": 0\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"key\": \"\",\n    \"order\": \"0\",\n    \"category\": [\n        {\n            \"lang\": \"en\",\n            \"title\": \"Peace\"\n        },\n        {\n            \"lang\": \"ar\",\n            \"title\": \"سلام\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}categories/:id",
+											"host": [
+												"{{url}}categories"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "685bfde12e28fb20831a4260"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": [
+										{
+											"name": "update",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"key\": \"\",\n    \"order\": \"0\",\n    \"category\": [\n        {\n            \"lang\": \"en\",\n            \"title\": \"Peace\"\n        },\n        {\n            \"lang\": \"ar\",\n            \"title\": \"سلام\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}categories/:id",
+													"host": [
+														"{{url}}categories"
+													],
+													"path": [
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "685bfde12e28fb20831a4260"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "253"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"fd-JlxbN8YGY8NrVnRYPHEV7Cqzd5c\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 25 Jun 2025 13:47:53 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Category updated\",\n    \"data\": {\n        \"_id\": \"685bfde12e28fb20831a4260\",\n        \"category\": [\n            {\n                \"lang\": \"en\",\n                \"title\": \"Peace\"\n            },\n            {\n                \"lang\": \"ar\",\n                \"title\": \"سلام\"\n            }\n        ],\n        \"key\": \"\",\n        \"order\": 0,\n        \"createdAt\": \"2025-06-25T13:47:13.011Z\",\n        \"updatedAt\": \"2025-06-25T13:47:53.782Z\",\n        \"__v\": 3\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "delete",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}categories/:id",
+											"host": [
+												"{{url}}categories"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "685c08f3583f1a171f4c11ad"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": [
+										{
+											"name": "delete",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{url}}categories/:id",
+													"host": [
+														"{{url}}categories"
+													],
+													"path": [
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "685bfaa51d62a4f02cb9cf1e"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "30"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"1e-oCBh6KwgTqOw4kBmQwxTMOxy7mE\""
+												},
+												{
+													"key": "Date",
+													"value": "Wed, 25 Jun 2025 13:41:54 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Category deleted\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Stories",
+							"item": [
+								{
+									"name": "get",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"categories\":[\"685c097514df675510eee252\"]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}stories/all",
+											"host": [
+												"{{url}}stories"
+											],
+											"path": [
+												"all"
+											],
+											"query": [
+												{
+													"key": "language",
+													"value": "ar",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "add",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"categories\": [\n        \"685c08f3583f1a171f4c11ad\"\n    ],\n    \"image\":\"image1.png\",\n    \"story\": [\n         {\n            \"lang\": \"en\",\n            \"title\": \"The Story of Prophet Yousaf (A.S.)\",\n            \"description\": \"Prophet Yousaf (A.S.) was known for his patience and wisdom. He was sold as a slave by his brothers, but later rose to power in Egypt. His story teaches us about perseverance, forgiveness, and trust in Allah's plan.\"\n        },\n        {\n            \"lang\": \"ar\",\n            \"title\": \"قصة النبي يوسف (عليه السلام)\",\n            \"description\": \"كان النبي يوسف (عليه السلام) معروفًا بصبره وحكمته. تم بيعه كعبد من قبل إخوته، لكنه أصبح لاحقًا ذو مكانة عالية في مصر. قصته تعلمنا عن الصبر والمغفرة والثقة في خطة الله.\"\n        }\n    ],\n    \"media\": {\n        \"url\": \"audio_prophat_story.mp3\",\n        \"type\": \"audio\",\n        \"length\": \"03:00\"\n    }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}stories/",
+											"host": [
+												"{{url}}stories"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"story\": [\n    {\n      \"lang\": \"en\",\n      \"title\": \"The Story of Prophet Muhammad (PBUH)\",\n      \"description\": \"Prophet Muhammad (PBUH) was born in Mecca, he received the first revelation at the age of 40, and he spread the message of Islam until his death. His teachings and life serve as a guide for Muslims around the world.\",\n      \"tags\": [\"Prophet Muhammad\", \"Islam\", \"Mecca\"]\n    },\n    {\n      \"lang\": \"ar\",\n      \"title\": \"قصة النبي محمد (صلى الله عليه وسلم)\",\n      \"description\": \"وُلد النبي محمد (صلى الله عليه وسلم) في مكة، وتلقى أول وحي له في سن الأربعين، ونشر رسالة الإسلام حتى وفاته. وتعد تعاليمه وحياته مرشدًا للمسلمين في جميع أنحاء العالم.\",\n      \"tags\": [\"النبي محمد\", \"الإسلام\", \"مكة\"]\n    }\n  ],\n  \"media\": {\n    \"url\": \"audio_prophat_story.mp3\",\n    \"type\": \"audio\",\n    \"length\": \"03:00\"\n  }\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}stories/:id",
+											"host": [
+												"{{url}}stories"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "685bdb1340e50d78bc1d68d6"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								},
+								{
+									"name": "delete",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}stories/:id",
+											"host": [
+												"{{url}}stories"
+											],
+											"path": [
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "685bef42594f75f5a95a6e01"
+												}
+											]
+										},
+										"description": "{ \"message\": \"Invalid subscription type. Valid types are: sparkConnection, bloomAgainEssentials, healingHearts\"}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Dashboard",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}admin/dashboard",
+									"host": [
+										"{{url}}admin"
+									],
+									"path": [
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users stats/Area Installed",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}admin/user-stats-by-region?year=2025",
+									"host": [
+										"{{url}}admin"
+									],
+									"path": [
+										"user-stats-by-region"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2025"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "all users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}admin/all-users?page=1",
+									"host": [
+										"{{url}}admin"
+									],
+									"path": [
+										"all-users"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "suspended",
+											"description": " \"active\", \"inactive\",",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "keyword",
+											"value": "testuser1@gmail.com",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user account state",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"active\"\n\n//           \"active\",\n//           \"inactive\",\n//           \"suspended\",\n//           \"softDeleted\",\n//           \"hardDeleted\",\n//           \"restricted\",\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}admin/users/:userId/account-state",
+									"host": [
+										"{{url}}admin"
+									],
+									"path": [
+										"users",
+										":userId",
+										"account-state"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "67a30ed6ffd28a771241668b"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{adminToken}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
