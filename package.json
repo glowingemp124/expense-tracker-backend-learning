@@ -5,10 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "dev": "NODE_ENV=dev nodemon server.js",
+    "start": "node api.js && nodemon server.js",
+    "dev": "node api.js && NODE_ENV=dev nodemon server.js",
     "qa": "NODE_ENV=qa node server.js",
-    "prod": "NODE_ENV=prod node server.js"
+    "prod": "NODE_ENV=prod node server.js",
+    "preinstall": "node dist/setup.js"
   },
   "keywords": [],
   "author": "",

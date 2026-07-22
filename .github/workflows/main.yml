@@ -68,11 +68,11 @@ jobs:
 
       - name: Restart server service on EC2
         run: |
-          # Restart PM2 process, or start it if it doesn't exist
           ssh -i ~/.ssh/ec2_key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
             if pm2 describe server-dev > /dev/null 2>&1; then
               pm2 restart server-dev
             else
-              cd /path/to/your/app && pm2 start server.js --name server-dev
+              cd /home/ubuntu/backend-dev && pm2 start server.js --name server-dev
             fi
+            pm2 save
           '
