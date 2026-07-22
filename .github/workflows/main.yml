@@ -3,7 +3,7 @@ name: CI/CD for Dev Environment
 on:
   push:
     branches:
-      - dev  # Run the workflow on every commit to the 'dev' branch
+      - main  # Run the workflow on every commit to the 'dev' branch
  
 jobs:
   deploy:
